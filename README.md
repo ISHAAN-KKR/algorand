@@ -1,5 +1,5 @@
 
-# 🚀 IdeaVotingApp – Algorand Smart Contract  
+# 🚀 IdeaVotingApp – Algorand SDK 
 
 <p align="center">
   <img src="https://img.shields.io/badge/Built%20With-Algorand-blue?style=for-the-badge&logo=algorand" alt="Algorand">
@@ -67,6 +67,15 @@ git clone https://github.com/YOUR-USERNAME/IdeaVotingApp.git
 cd IdeaVotingApp
 npm install
 ```
+📦 **Frontend :**  
+Clone and run [algorand-frontend](https://github.com/ISHAAN-KKR/algorand-frontend) side by side with this repo:
+
+```bash
+git clone https://github.com/ISHAAN-KKR/algorand-frontend.git
+cd algorand-frontend
+npm install
+npm run dev
+
 
 ### 3️⃣ Configure Environment
 
