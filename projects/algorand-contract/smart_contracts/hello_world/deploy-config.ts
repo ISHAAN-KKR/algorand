@@ -1,33 +1,34 @@
 import { AlgorandClient } from '@algorandfoundation/algokit-utils'
-import { HelloWorldFactory } from '../artifacts/hello_world/HelloWorldClient'
+import { IdeaVotingAppFactory } from '../artifacts/hello_world/IdeaVotingAppClient'
 
-// Below is a showcase of various deployment options you can use in TypeScript Client
 export async function deploy() {
-  console.log('=== Deploying HelloWorld ===')
+  console.log('=== Deploying IdeaVotingApp ===')
 
+  // Create Algorand client from environment (e.g., localnet)
   const algorand = AlgorandClient.fromEnvironment()
   const deployer = await algorand.account.fromEnvironment('DEPLOYER')
 
-  const factory = algorand.client.getTypedAppFactory(HelloWorldFactory, {
+  // Create a typed factory for the IdeaVotingApp
+  const factory = algorand.client.getTypedAppFactory(IdeaVotingAppFactory, {
     defaultSender: deployer.addr,
   })
 
-  const { appClient, result } = await factory.deploy({ onUpdate: 'append', onSchemaBreak: 'append' })
+  // Deploy the app
+  const { appClient, result } = await factory.deploy({
+    onUpdate: 'append',
+    onSchemaBreak: 'append',
+  })
 
-  // If app was just created fund the app account
+  console.log(`App deployed: ${appClient.appName} (${appClient.appId})`)
+  
+  // Fund the app account with 1 Algo if newly created
   if (['create', 'replace'].includes(result.operationPerformed)) {
     await algorand.send.payment({
-      amount: (1).algo(),
       sender: deployer.addr,
       receiver: appClient.appAddress,
+      amount: (1).algo(),
     })
   }
 
-  const method = 'hello'  
-  const response = await appClient.send.hello({
-    args: { name: 'world' },
-  })
-  console.log(
-    `Called ${method} on ${appClient.appClient.appName} (${appClient.appClient.appId}) with name = world, received: ${response.return}`,
-  )
+  console.log('Deployment complete ✅')
 }
