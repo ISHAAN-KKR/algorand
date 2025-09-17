@@ -108,7 +108,7 @@ npm run call:vote 0
 ## 📸 Screenshots / Demo
 
 <p align="center">
-  <img src="https://placehold.co/600x300/black/white?text=App+Dashboard+Coming+Soon" alt="Demo Screenshot" width="80%">
+  <img src="123.png" alt="App Screenshot" width="80%">
 </p>
 
 ---
